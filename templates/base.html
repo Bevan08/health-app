@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <h2 class="logo">MediView</h2>
+
+    <div class="nav-links">
+        <a href="/dashboard">Home</a>
+        <a href="/reports">Reports</a>
+        <a href="/doctor">Careline</a>
+    </div>
+</div>
+
+<!-- PAGE CONTENT -->
+<div class="content">
+    {% block content %}{% endblock %}
+</div>
+
+</body>
+</html>

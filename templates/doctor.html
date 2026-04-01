@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
 
-<head>
-<title>Care Manager & Doctor</title>
+{% block title %}Care Manager & Doctor{% endblock %}
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block content %}
 
 <link rel="stylesheet" href="{{ url_for('static', filename='doctor.css') }}">
 
@@ -57,7 +55,6 @@
 
 /* ---------------- RESPONSIVE ---------------- */
 
-/* Tablet */
 @media (max-width: 900px){
 
     .cards{
@@ -69,38 +66,12 @@
     }
 }
 
-/* Mobile */
 @media (max-width: 600px){
 
-    /* Navbar stack */
-    .navbar{
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-    }
-
-    .navbar ul{
-        flex-direction: column;
-        width: 100%;
-        gap: 10px;
-        padding: 0;
-    }
-
-    .navbar ul li{
-        width: 100%;
-    }
-
-    .navbar a{
-        display: block;
-        width: 100%;
-    }
-
-    /* Cards single column */
     .cards{
         grid-template-columns: 1fr;
     }
 
-    /* Buttons stack */
     .actions{
         flex-direction: column;
     }
@@ -109,7 +80,6 @@
         width: 100%;
     }
 
-    /* Text adjustments */
     h2{
         font-size: 20px;
     }
@@ -124,26 +94,10 @@
 }
 </style>
 
-</head>
-
-<body>
-
-<!-- NAVBAR -->
-<div class="navbar">
-<h2>HealthConnect</h2>
-<ul>
-<li><a href="/dashboard">Home</a></li>
-<li><a href="/reports">Reports</a></li>
-<li>Careline</li>
-<li>Help</li>
-</ul>
-</div>
-
 <div class="container">
 
 <h2>Care Manager & Medical Support</h2>
 
-<!-- CARE MANAGER -->
 <div class="section highlight">
 
 <h3>Assigned Care Manager</h3>
@@ -152,7 +106,6 @@
 <p><strong>Contact:</strong> +91 9876543210</p>
 <p class="status-online">● Available Now</p>
 
-<!-- QUICK ACTIONS -->
 <div class="actions">
 <button class="primary-btn">📞 Call</button>
 <button class="secondary-btn">💬 Chat</button>
@@ -161,7 +114,6 @@
 
 </div>
 
-<!-- PATIENT SUMMARY -->
 <div class="section">
 
 <h3>Patient Summary</h3>
@@ -193,7 +145,6 @@
 
 </div>
 
-<!-- DOCTOR INFO -->
 <div class="section">
 
 <h3>Doctor Information</h3>
@@ -203,7 +154,6 @@
 
 </div>
 
-<!-- DOCTOR NOTES -->
 <div class="section">
 
 <h3>Doctor Notes</h3>
@@ -212,7 +162,6 @@
 
 </div>
 
-<!-- PRESCRIPTION -->
 <div class="section" id="prescription-card">
 
 <h3>Prescription</h3>
@@ -225,7 +174,6 @@
 
 </div>
 
-<!-- EMERGENCY -->
 <div class="section emergency-box">
 
 <h3>Emergency Support</h3>
@@ -240,5 +188,4 @@
 
 </div>
 
-</body>
-</html>
+{% endblock %}

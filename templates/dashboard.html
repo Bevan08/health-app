@@ -1,80 +1,87 @@
-<!DOCTYPE html> 
-<html> 
-<head> 
-<title>Health Dashboard</title> 
-<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> 
-</head> 
-<body> 
-<!-- NAVBAR --> 
-<div class="navbar"> 
-<h2>HealthConnect</h2> 
-<ul> 
-<li><a href="/dashboard">Home</a></li> 
-<li><a href="/reports">Reports</a></li> 
-<li><a href="/doctor">Careline</a></li> 
-<li><a href="/help">Help</a></li> 
-</ul> 
-</div> 
-<div class="dashboard"> 
-<h2>Welcome, {{data.name}}</h2> 
-<!-- TOP CARDS --> 
-<div class="cards"> 
-<div class="card"> 
-<h3>Glucose</h3> 
-<p>{{data.glucose}}</p> 
-</div> 
-<div class="card"> 
-<h3>Systolic BP</h3> 
-<p>{{data.systolic}}</p> 
-</div> 
-<div class="card"> 
-<h3>Diastolic BP</h3> 
-<p>{{data.diastolic}}</p> 
-</div> 
-<div class="card"> 
-<h3>Pulse</h3> 
-<p>{{data.pulse}}</p> 
-</div> 
-<div class="card"> 
-<h3>Heart Rate</h3> 
-<p>{{data.heart_rate}}</p> 
-</div> 
-</div> 
-<!-- SLEEP + MEDICATION --> 
-<div class="double-section"> 
-<div class="card"> 
-<h3>Sleep</h3> 
-<p>{{data.sleep}}</p> 
-</div> 
-<div class="card"> 
-<h3>Medications</h3> 
-<p> 
-<a href="{{url_for('doctor')}}#prescription-card" class="link"> 
-View your prescribed medications 
-</a> 
-</p> 
-</div> 
-</div> 
-<!-- AI INSIGHTS --> 
-<div class="card full"> 
-<h3>AI Health Insights</h3> 
-{% for i in data.insights %} 
-<div class="insight"> 
-<p><strong>{{ i.message }}</strong></p> 
-<span class="risk">{{ i.risk }}</span> 
-<p class="suggestion">{{ i.suggestion }}</p> 
-</div> 
-{% endfor %} 
-</div> 
-<!-- DOCTOR --> 
-<div class="card full"> 
-<h3>Physician Contact</h3> 
-<div class="doctor-info"> 
-<span>{{data.doctor}}</span> 
-<button class="connect-btn">Connect</button> 
-</div> 
-</div> 
-</div> 
-</body> 
-</html> 
+{% extends "base.html" %}
+
+{% block title %}Health Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="dashboard">
+
+<h2>Welcome, {{data.name}}</h2>
+
+<!-- TOP CARDS -->
+<div class="cards">
+
+<div class="card">
+<h3>Glucose</h3>
+<p>{{data.glucose}}</p>
+</div>
+
+<div class="card">
+<h3>Systolic BP</h3>
+<p>{{data.systolic}}</p>
+</div>
+
+<div class="card">
+<h3>Diastolic BP</h3>
+<p>{{data.diastolic}}</p>
+</div>
+
+<div class="card">
+<h3>Pulse</h3>
+<p>{{data.pulse}}</p>
+</div>
+
+<div class="card">
+<h3>Heart Rate</h3>
+<p>{{data.heart_rate}}</p>
+</div>
+
+</div>
+
+<!-- SLEEP + MEDICATION -->
+<div class="double-section">
+
+<div class="card">
+<h3>Sleep</h3>
+<p>{{data.sleep}}</p>
+</div>
+
+<div class="card">
+<h3>Medications</h3>
+<p>
+<a href="{{url_for('doctor')}}#prescription-card" class="link">
+View your prescribed medications
+</a>
+</p>
+</div>
+
+</div>
+
+<!-- AI INSIGHTS -->
+<div class="card full">
+<h3>AI Health Insights</h3>
+
+{% for i in data.insights %}
+<div class="insight">
+<p><strong>{{ i.message }}</strong></p>
+<span class="risk">{{ i.risk }}</span>
+<p class="suggestion">{{ i.suggestion }}</p>
+</div>
+{% endfor %}
+
+</div>
+
+<!-- DOCTOR -->
+<div class="card full">
+<h3>Physician Contact</h3>
+
+<div class="doctor-info">
+<span>{{data.doctor}}</span>
+<button class="connect-btn">Connect</button>
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

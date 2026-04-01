@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
 
-<head>
-<title>Reports</title>
+{% block title %}Reports{% endblock %}
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block content %}
 
 <link rel="stylesheet" href="{{ url_for('static', filename='report.css') }}">
 
@@ -12,14 +10,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
-/* QUICK RESPONSIVE FIXES (add inside CSS file ideally) */
-
-/* Container spacing */
 .container {
     padding: 20px 40px;
 }
 
-/* Charts grid */
 .charts-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -33,7 +27,6 @@
     height: 300px;
 }
 
-/* Buttons */
 .filter-buttons {
     display: flex;
     gap: 10px;
@@ -49,7 +42,6 @@
     cursor: pointer;
 }
 
-/* Table responsive */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -64,8 +56,6 @@ th, td {
     margin-top: 30px;
 }
 
-/* ---------------- MOBILE ---------------- */
-
 @media (max-width: 900px) {
     .charts-grid {
         grid-template-columns: 1fr 1fr;
@@ -78,25 +68,6 @@ th, td {
 
 @media (max-width: 600px) {
 
-    /* Navbar fix */
-    .navbar {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-    }
-
-    .navbar ul {
-        flex-direction: column;
-        width: 100%;
-        gap: 10px;
-        padding: 0;
-    }
-
-    .navbar ul li {
-        width: 100%;
-    }
-
-    /* Charts single column */
     .charts-grid {
         grid-template-columns: 1fr;
     }
@@ -105,7 +76,6 @@ th, td {
         height: 250px;
     }
 
-    /* Buttons full width */
     .filter-buttons {
         flex-direction: column;
     }
@@ -114,14 +84,12 @@ th, td {
         width: 100%;
     }
 
-    /* Table scroll */
     table {
         display: block;
         overflow-x: auto;
         white-space: nowrap;
     }
 
-    /* Text adjustments */
     h2 {
         font-size: 20px;
     }
@@ -132,53 +100,35 @@ th, td {
 }
 </style>
 
-</head>
-
-<body>
-
-<!-- NAVBAR -->
-<div class="navbar">
-<h2>HealthConnect</h2>
-<ul>
-<li><a href="/dashboard">Home</a></li>
-<li><a href="/report">Reports</a></li>
-<li><a href="/doctor">Careline</a></li>
-<li>Help</li>
-</ul>
-</div>
-
 <div class="container">
 
 <h2>Health Reports</h2>
 
-<!-- FILTER BUTTONS -->
 <div class="filter-buttons">
 <button onclick="showChart('daily')">Day</button>
 <button onclick="showChart('weekly')">Week</button>
 <button onclick="showChart('monthly')">Month</button>
 </div>
 
-<!-- CHARTS -->
 <div class="charts-grid">
 
-    <div class="chart-card">
-        <h4>Daily Report</h4>
-        <canvas id="dailyChart"></canvas>
-    </div>
+<div class="chart-card">
+<h4>Daily Report</h4>
+<canvas id="dailyChart"></canvas>
+</div>
 
-    <div class="chart-card">
-        <h4>Weekly Report</h4>
-        <canvas id="weeklyChart"></canvas>
-    </div>
+<div class="chart-card">
+<h4>Weekly Report</h4>
+<canvas id="weeklyChart"></canvas>
+</div>
 
-    <div class="chart-card">
-        <h4>Monthly Report</h4>
-        <canvas id="monthlyChart"></canvas>
-    </div>
+<div class="chart-card">
+<h4>Monthly Report</h4>
+<canvas id="monthlyChart"></canvas>
+</div>
 
 </div>
 
-<!-- AI INSIGHTS -->
 <div class="section">
 <h3>AI Health Insights</h3>
 
@@ -192,7 +142,6 @@ th, td {
 
 </div>
 
-<!-- TREND -->
 <div class="section">
 <h3>Trend Comparison</h3>
 
@@ -201,7 +150,6 @@ th, td {
 
 </div>
 
-<!-- REPORT HISTORY -->
 <div class="section">
 <h3>Report History</h3>
 
@@ -228,7 +176,6 @@ th, td {
 
 </div>
 
-<!-- DOWNLOAD -->
 <div style="margin-top: 20px;">
 <a href="{{ url_for('download_report') }}" class="btn">Download PDF</a>
 </div>
@@ -280,5 +227,4 @@ function showChart(type){
 }
 </script>
 
-</body>
-</html>
+{% endblock %}
