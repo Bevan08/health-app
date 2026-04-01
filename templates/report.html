@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Reports</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='report.css') }}">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<style>
+/* QUICK RESPONSIVE FIXES (add inside CSS file ideally) */
+
+/* Container spacing */
+.container {
+    padding: 20px 40px;
+}
+
+/* Charts grid */
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.chart-card {
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    height: 300px;
+}
+
+/* Buttons */
+.filter-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.filter-buttons button {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    background: #2d89ef;
+    color: white;
+    cursor: pointer;
+}
+
+/* Table responsive */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+.section {
+    margin-top: 30px;
+}
+
+/* ---------------- MOBILE ---------------- */
+
+@media (max-width: 900px) {
+    .charts-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .container {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+
+    /* Navbar fix */
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .navbar ul {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+        padding: 0;
+    }
+
+    .navbar ul li {
+        width: 100%;
+    }
+
+    /* Charts single column */
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .chart-card {
+        height: 250px;
+    }
+
+    /* Buttons full width */
+    .filter-buttons {
+        flex-direction: column;
+    }
+
+    .filter-buttons button {
+        width: 100%;
+    }
+
+    /* Table scroll */
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    /* Text adjustments */
+    h2 {
+        font-size: 20px;
+    }
+
+    h3 {
+        font-size: 18px;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+<h2>HealthConnect</h2>
+<ul>
+<li><a href="/dashboard">Home</a></li>
+<li><a href="/report">Reports</a></li>
+<li><a href="/doctor">Careline</a></li>
+<li>Help</li>
+</ul>
+</div>
+
+<div class="container">
+
+<h2>Health Reports</h2>
+
+<!-- FILTER BUTTONS -->
+<div class="filter-buttons">
+<button onclick="showChart('daily')">Day</button>
+<button onclick="showChart('weekly')">Week</button>
+<button onclick="showChart('monthly')">Month</button>
+</div>
+
+<!-- CHARTS -->
+<div class="charts-grid">
+
+    <div class="chart-card">
+        <h4>Daily Report</h4>
+        <canvas id="dailyChart"></canvas>
+    </div>
+
+    <div class="chart-card">
+        <h4>Weekly Report</h4>
+        <canvas id="weeklyChart"></canvas>
+    </div>
+
+    <div class="chart-card">
+        <h4>Monthly Report</h4>
+        <canvas id="monthlyChart"></canvas>
+    </div>
+
+</div>
+
+<!-- AI INSIGHTS -->
+<div class="section">
+<h3>AI Health Insights</h3>
+
+{% for i in data.insights %}
+<div class="insight-box">
+<p><strong>{{ i.message }}</strong></p>
+<p>Risk: {{ i.risk }}</p>
+<p>{{ i.suggestion }}</p>
+</div>
+{% endfor %}
+
+</div>
+
+<!-- TREND -->
+<div class="section">
+<h3>Trend Comparison</h3>
+
+<p class="trend up">⬆ Improvement in glucose levels this week</p>
+<p class="trend down">⬇ Slight increase in BP</p>
+
+</div>
+
+<!-- REPORT HISTORY -->
+<div class="section">
+<h3>Report History</h3>
+
+<table>
+<tr>
+<th>Date</th>
+<th>Type</th>
+<th>Status</th>
+</tr>
+
+<tr>
+<td>12 Mar</td>
+<td>BP Report</td>
+<td class="normal">Normal</td>
+</tr>
+
+<tr>
+<td>10 Mar</td>
+<td>Glucose</td>
+<td class="critical">High</td>
+</tr>
+
+</table>
+
+</div>
+
+<!-- DOWNLOAD -->
+<div style="margin-top: 20px;">
+<a href="{{ url_for('download_report') }}" class="btn">Download PDF</a>
+</div>
+
+</div>
+
+<script>
+try {
+
+const daily = JSON.parse('{{ data.daily | tojson | safe }}');
+const weekly = JSON.parse('{{ data.weekly | tojson | safe }}');
+const monthly = JSON.parse('{{ data.monthly | tojson | safe }}');
+
+function createChart(id, dataset, label){
+
+new Chart(document.getElementById(id), {
+type: "line",
+data: {
+labels: dataset.map((_, i) => "D" + (i+1)),
+datasets: [{
+label: label,
+data: dataset,
+borderColor: "#2d89ef",
+backgroundColor: "rgba(45,137,239,0.1)",
+fill: true,
+tension: 0.4
+}]
+},
+options: {
+responsive: true,
+maintainAspectRatio: false
+}
+});
+
+}
+
+createChart("dailyChart", daily, "Daily");
+createChart("weeklyChart", weekly, "Weekly");
+createChart("monthlyChart", monthly, "Monthly");
+
+} catch (error) {
+console.log("Chart Error:", error);
+}
+</script>
+
+<script>
+function showChart(type){
+    console.log("Switching to:",type);
+}
+</script>
+
+</body>
+</html>

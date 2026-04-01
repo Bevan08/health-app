@@ -1,0 +1,218 @@
+/* ===== PAGE ===== */
+body{
+font-family: 'Segoe UI', sans-serif;
+background:#c3e7f5;
+margin:0;
+}
+
+/* ===== NAVBAR ===== */
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 30px;
+min-height: 70px;
+box-sizing: border-box;
+background:#063154;
+color:white;
+flex-wrap: wrap; /* IMPORTANT */
+}
+
+.navbar h2 {
+    margin:0;
+    font-weight:600;
+}
+
+.navbar ul{
+display:flex;
+gap:30px;
+margin:0;
+padding:0;
+list-style:none;
+}
+
+.navbar a{
+color:white;
+text-decoration:none;
+font-size:15px;
+transition:0.3s;
+}
+
+.navbar a:hover{
+opacity:0.7;
+}
+
+/* ===== CONTAINER ===== */
+.container{
+max-width:1100px;
+margin:30px auto;
+padding:20px;
+}
+
+/* ===== CHART GRID ===== */
+.charts-grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap:20px;
+}
+
+.chart-card{
+    background:white;
+    padding:15px;
+    border-radius:12px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+    height:280px;
+    display:flex;
+    flex-direction:column;
+}
+
+.chart-card h4{
+margin-bottom:10px;
+font-size:14px;
+color:#333;
+}
+
+/* FIX CHART SIZE */
+.chart-card canvas{
+flex:1;
+width: 100%;
+height: 200px;
+}
+
+/* ===== SECTIONS ===== */
+.section{
+background:white;
+padding:20px;
+margin-top:20px;
+border-radius:12px;
+box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* ===== INSIGHTS ===== */
+.insight-box{
+background:#eef3ff;
+padding:12px;
+border-radius:8px;
+margin-bottom:10px;
+font-size:14px;
+}
+
+/* ===== TREND COLORS ===== */
+.trend.up{
+color:#28a745;
+}
+
+.trend.down{
+color:#e74c3c;
+}
+
+/* ===== TABLE ===== */
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:10px;
+}
+
+th, td{
+padding:10px;
+border-bottom:1px solid #eee;
+font-size:14px;
+}
+
+.normal{
+color:#28a745;
+}
+
+.critical{
+color:#e74c3c;
+}
+
+/* ===== BUTTON ===== */
+.btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+/* ================= RESPONSIVE ================= */
+
+/* TABLET */
+@media (max-width: 900px){
+
+    .chart-card{
+        width:48%; /* 2 per row */
+    }
+
+    .container{
+        padding:15px;
+    }
+}
+
+/* MOBILE */
+@media (max-width: 600px){
+
+    /* NAVBAR STACK */
+    .navbar{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:10px;
+        padding:15px;
+    }
+
+    .navbar ul{
+        flex-direction:column;
+        width:100%;
+        gap:10px;
+    }
+
+    .navbar ul li{
+        width:100%;
+    }
+
+    .navbar a{
+        display:block;
+        width:100%;
+    }
+
+    /* CHARTS SINGLE COLUMN */
+    .chart-card{
+        width:100%;
+        height:220px;
+    }
+
+    /* CONTAINER */
+    .container{
+        margin:10px;
+        padding:10px;
+    }
+
+    /* TABLE SCROLL FIX */
+    table{
+        display:block;
+        overflow-x:auto;
+        white-space:nowrap;
+    }
+
+    /* BUTTON FULL WIDTH */
+    .btn{
+        width:100%;
+        text-align:center;
+    }
+
+    /* TEXT ADJUST */
+    h2{
+        font-size:20px;
+    }
+
+    h3{
+        font-size:18px;
+    }
+}

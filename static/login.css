@@ -1,0 +1,120 @@
+/* ===== LOGIN PAGE (ADVANCED RESPONSIVE) ===== */
+
+body{
+margin:0;
+padding:0;
+font-family:'Segoe UI', sans-serif;
+background: linear-gradient(135deg, #4facfe, #00f2fe);
+min-height:100vh; /* FIX for mobile */
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+/* LOGIN BOX */
+
+.login-box{
+width:350px;
+max-width:90%; /* IMPORTANT for mobile */
+padding:40px;
+background: rgba(255,255,255,0.15);
+backdrop-filter: blur(12px);
+border-radius:15px;
+text-align:center;
+box-shadow:0 8px 30px rgba(0,0,0,0.2);
+color:white;
+}
+
+/* TITLE */
+
+.login-box h2{
+margin-bottom:25px;
+font-weight:600;
+color: black;
+}
+
+/* INPUT FIELDS */
+
+.login-box input{
+width:100%;
+padding:12px;
+margin:12px 0;
+border:none;
+border-radius:8px;
+outline:none;
+font-size:16px; /* prevents zoom on iPhone */
+background: rgba(255,255,255,0.8);
+box-sizing: border-box;
+}
+
+/* BUTTON */
+
+.login-box button{
+width:100%;
+padding:12px;
+margin-top:10px;
+background:#2d89ef;
+border:none;
+border-radius:8px;
+color:white;
+font-size:15px;
+cursor:pointer;
+transition:0.3s;
+}
+
+/* BUTTON HOVER */
+
+.login-box button:hover{
+background:#1b5fa7;
+transform: scale(1.05);
+}
+
+/* INPUT FOCUS EFFECT */
+
+.login-box input:focus{
+box-shadow:0 0 5px rgba(45,137,239,0.8);
+}
+
+/* ERROR MESSAGE (add support) */
+.error-msg{
+color:#ffdddd;
+font-size:14px;
+margin-bottom:10px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+/* TABLET */
+@media (max-width: 768px){
+.login-box{
+padding:30px;
+}
+}
+
+/* MOBILE */
+@media (max-width: 480px){
+
+body{
+padding:15px; /* prevents edge sticking */
+}
+
+.login-box{
+padding:25px;
+border-radius:12px;
+}
+
+.login-box h2{
+font-size:20px;
+}
+
+.login-box input{
+padding:10px;
+font-size:15px;
+}
+
+.login-box button{
+padding:10px;
+font-size:14px;
+}
+
+}
