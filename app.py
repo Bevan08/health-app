@@ -100,7 +100,7 @@ def login():
         password = request.form['password']
 
         for p in patients:
-            if p["name"] == username and p["password"] == password:
+            if p["name"].strip().lower() == username.strip().lower() and str(p["password"]).strip() == password.strip():
                 session['user'] = username
                 return redirect('/dashboard')
 
