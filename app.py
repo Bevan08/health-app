@@ -11,7 +11,7 @@ df.columns = df.columns.str.strip()
 
 patients = []
 
-df = pd.read_excel("patients_clean.xlsx")
+df = pd.read_excel("patients_updated.xlsx")
 
 patients = []
 
