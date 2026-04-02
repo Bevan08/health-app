@@ -49,7 +49,7 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 20px;
-    margin-bottom: 20px;
+    
 }
 
 /* CARD */
@@ -60,6 +60,7 @@ body {
     backdrop-filter: blur(10px);
     box-shadow: 0 8px 20px rgba(0,0,0,0.05);
     transition: 0.3s;
+    margin-bottom: 50px;
 }
 
 .card:hover {
