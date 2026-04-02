@@ -156,7 +156,7 @@ color:#e74c3c;
 }
 
 /* MOBILE */
-@media (max-width: 100%){
+@media (max-width: 50%){
     .chart-card canvas {
         height: 180px; 
     }
