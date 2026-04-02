@@ -1,9 +1,27 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html>
 
-{% block title %}Health Dashboard{% endblock %}
+<head>
+<title>Health Dashboard</title>
 
-{% block content %}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <h2>MediView</h2>
+    <ul>
+        <li><a href="/dashboard">Home</a></li>
+        <li><a href="/reports">Reports</a></li>
+        <li><a href="/doctor">Careline</a></li>
+    </ul>
+</div>
+
+<!-- MAIN DASHBOARD -->
 <div class="dashboard">
 
 <h2>Welcome, {{data.name}}</h2>
@@ -84,4 +102,5 @@ View your prescribed medications
 
 </div>
 
-{% endblock %}
+</body>
+</html>
